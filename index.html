@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <title>POPUI | 基本日期</title>
+    <script src="http://misc.360buyimg.com/jdf??/lib/jquery-1.6.4.js,/1.0.0/unit/base/1.0.0/base.js"></script>
+    <style type="text/css">
+        p {
+            text-align: center;
+        }
+        
+        input {
+            height: 14px;
+            padding: 8px;
+            border: 1px solid #CCC;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="padding: 50px;">
+        <p>
+            显示小时：<input id="date1" type="text" value="">
+        </p>
+        <br>
+        <p>
+            显示时分：<input id="date2" type="text" value="">
+        </p>
+        <br>
+        <p>
+            显示时分秒：<input id="date3" type="text" value="">
+        </p>
+        <br>
+        <p>
+            偏移50px,不显示时分秒：<input id="date4" type="text" value="">
+        </p>
+        <br>
+        <p>
+            多区间：<input id="date5" type="text" value="">
+        </p>
+        <!-- <p>
+            多区间：<input id="date6" type="text" value="">
+        </p> -->
+    </div>
+</body>
+<script>
+    seajs.use([
+        './popui/js/calendar/calendar',
+        './popui/js/base/date'
+    ], function(calendar, dateUtil) {
+        $('#date1').calendar({
+            fillInputVal: true,
+            startDate: '2016-01-10',
+            choseDate: '2018-01-10',
+            endDate: '2019-01-27',
+            hmsFormat: 'hh'
+        });
+        $('#date2').calendar({
+            fillInputVal: true,
+            startDate: '2016-01-10',
+            choseDate: '2018-01-10',
+            endDate: '2019-01-27',
+            hmsFormat: 'hh-mm'
+        });
+        $('#date3').calendar({
+            fillInputVal: true,
+            startDate: '2016-01-10',
+            choseDate: '2018-01-10',
+            endDate: '2019-01-27',
+            hmsFormat: 'hh-mm-ss'
+        });
+        $('#date4').calendar({
+            fillInputVal: true,
+            startDate: '2016-01-10',
+            choseDate: '2015-01-10',
+            endDate: '2018-01-27',
+            diffX: 50
+        });
+        $('#date5').calendar({
+            fillInputVal: true,
+            choseDate: new Date(),
+            multipleZones: [{
+                'startTime': new Date(),
+                'endTime': dateUtil.getDay(5)
+            }, {
+                'startTime': dateUtil.getDay(9),
+                'endTime': dateUtil.getDay(13)
+            }]
+        });
+        $('#date6').calendar({
+            fillInputVal: true,
+            choseDate: new Date(),
+            multipleZones: [{
+                'startTime': new Date(),
+                'endTime': '2017-07-28'
+            }, {
+                'startTime': '2017-10-12',
+                'endTime': '2018-02-25'
+            }, {
+                'startTime': '2017-03-02',
+                'endTime': '2017-02-25'
+            }, {
+                'startTime': '2017-04-07',
+                'endTime': '2017-05-25'
+            }]
+        });
+        var $calendar = $('#date1').getPopUI('calendar');
+        $calendar.bind('choose', function(ev, date) {
+            console.log(date);
+        });
+    });
+</script>
+
+</html>

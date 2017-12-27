@@ -1,0 +1,108 @@
+.choose-amount.updown {
+  width: 49px;
+  height: 44px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  position: relative;
+  margin-right: 10px;
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+.choose-amount.updown input {
+  display: block;
+  width: 31px;
+  height: 42px;
+  line-height: 42px;
+  position: absolute;
+  top: 1px;
+  left: 0;
+  border: none;
+  border: 0;
+  text-align: center;
+}
+
+.choose-amount.updown a {
+  display: block;
+  width: 15px;
+  text-align: center;
+  height: 22px;
+  line-height: 22px;
+  overflow: hidden;
+  background: #f1f1f1;
+  color: #666;
+  position: absolute;
+  right: -1px;
+  border: 1px solid #ccc;
+  text-decoration: none;
+}
+
+.choose-amount.updown a.disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.choose-amount.updown a.btn-add {
+  top: -1px;
+}
+
+.choose-amount.updown a.btn-reduce {
+  bottom: -1px;
+}
+
+.choose-amount.leftright {
+  width: 100px;
+  height: 30px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  position: relative;
+  margin-right: 10px;
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+.choose-amount.leftright input {
+  display: block;
+  width: 40px;
+  height: 30px;
+  line-height: 30px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  text-align: center;
+  font-size: 12px;
+  position: absolute;
+  left: 50%;
+  margin-left: -20px;
+}
+
+.choose-amount.leftright a {
+  display: block;
+  width: 30px;
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+  overflow: hidden;
+  background: #f1f1f1;
+  color: #666;
+  position: absolute;
+  top: -1px;
+  border: 1px solid #ccc;
+  text-decoration: none;
+}
+
+.choose-amount.leftright a.disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.choose-amount.leftright a.btn-add {
+  right: -1px;
+}
+
+.choose-amount.leftright a.btn-reduce {
+  left: -1px;
+}
