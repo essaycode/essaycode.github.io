@@ -3,7 +3,7 @@ layout: post
 title:  "windows环境用jekyll搭建博客详细步骤"
 date:   2018-01-09 19:21:19 +0800
 author: "廖艳丽"
-categories: jekyll update
+categories: liaoyanli
 ---
 
 ### window环境准备
