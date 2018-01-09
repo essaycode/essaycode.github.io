@@ -1,0 +1,68 @@
+---
+layout: post
+title:  "react组件刷新"
+date:   2018-01-09 16:44:19 +0800
+author: "杨磊"
+categories: yanglei
+---
+
+### react组件数据刷新
+
+当数据卸载react的state中时，直接调用this.state.XX来触发自动渲染。
+
+#### 此操作方式无法触发div内部数据变化
+```
+class Index extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            code: ''
+        }
+    }
+    changecode() {
+        this.state.code = '2'
+    }
+    render() {
+        return <div>{this.state.code}</div>
+    }
+}
+```
+解决以上绑定问题有一下2中解决方案：
+
+- 数据不存在state中，因为state是react中一个默认携带的数据，代码修改如下：
+
+```
+class Index extends React.Component {
+    constructor(props) {
+        super(props);
+        this.code = '';
+    }
+    changecode() {
+        this.code = '2'
+    }
+    render() {
+        return <div>{this.code}</div>
+    }
+}
+```
+- 另外一种方法是使用setState来改变state的值，才可以重新渲染，代码改动如下：
+```
+class Index extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            code: ''
+        }
+    }
+    changecode() {
+        this.setState({
+            code: 1
+        })
+    }
+    render() {
+        return <div>{this.state.code}</div>
+    }
+}
+```
+
+以上2种方法就可以动态更新data数据了。
