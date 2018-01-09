@@ -7,8 +7,8 @@ categories: liaoyanli
 ---
 
 ### window环境准备
-1. rubyinstaller 下载及安装 https://rubyinstaller.org/downloads/ 记得全部勾选
-2. Ruby DevKit 下载devkit压缩包 https://rubyinstaller.org/downloads/ 解压该压缩包，进入到该目录
+1. rubyinstaller 下载及安装 [rubyinstaller下载页](https://rubyinstaller.org/downloads/) 记得全部勾选
+2. Ruby DevKit 下载devkit压缩包 [devkit下载页](https://rubyinstaller.org/downloads/) 解压该压缩包，进入到该目录
 3. 解压该DevKit压缩包，用命令行(cmd)进入到该目录，如：cd /e:/devit 
 4. 执行ruby dk.rb init 会看到找到ruby的安装目录，如果看不到请手动修改该目录下confit.yml的ruby安装目录，注意格式 - D:\Ruby23-x64，带有横线
 5. 执行ruby dk.rb install
@@ -29,7 +29,7 @@ categories: liaoyanli
 
 ### 效果预览 
 - 访问 https://你的用户名/github.io
-- 我的博客地址是 https://shelly0702/github.io
+- 我的博客地址是 [https://shelly0702/github.io](https://shelly0702/github.io)
 
 ### 主题，gemfile和_config.yml里的俩主题要对应（todo）
 
@@ -40,6 +40,6 @@ categories: liaoyanli
 
 
 ### 相关资料
-- https://github.com/jekyll/jekyll
-- https://www.jekyll.com.cn/
+- [https://github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
+- [https://www.jekyll.com.cn/](https://www.jekyll.com.cn/)
 
