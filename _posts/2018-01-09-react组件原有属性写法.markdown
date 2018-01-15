@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "react组件原有属性写法"
-date:   2018-01-09 16:44:19 +0800
+date:   2018-01-09 19:30:19 +0800
 author: "杨磊"
 categories: yanglei
 ---
