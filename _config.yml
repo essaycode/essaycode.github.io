@@ -18,8 +18,4 @@ baseurl: "" # the subpath of your site, e.g. /blog
 # Build settings
 markdown: kramdown
 
-<<<<<<< HEAD
-# theme: jekyll-theme-dinky
-=======
-theme: jekyll-theme-midnight
->>>>>>> 7e3c863c9b1f88b3540dc41a3fac6a47bc6abddb
+# theme: jekyll-theme-midnight
