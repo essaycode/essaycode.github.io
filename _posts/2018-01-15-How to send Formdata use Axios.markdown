@@ -12,27 +12,27 @@ categories: sunyinfeng
 
 1. 浏览器。在浏览器中，您可以使用 URLSearchParams API，如下所示：
 
-```
+{% highlight ruby %}
 var params = new URLSearchParams();
 params.append('param1', 'value1');
 params.append('param2', 'value2');
 axios.post('/foo', params);
-```
+{% endhighlight %}
  
 请注意，并不是所有浏览器都支持 URLSearchParams（请参阅caniuse.com），但是可以使用polyfill。
 或者，可以使用qs库编码数据：
 
-```
+{% highlight ruby %}
 var qs = require('qs');
 axios.post('/foo', qs.stringify({ 'bar': 123 }));
-```
+{% endhighlight %}
 
 2. Node.js。在node.js中，你可以使用 querystring 模块，如下所示：
 
-```
+{% highlight ruby %}
 var querystring = require('querystring');
 axios.post('http://something.com/', querystring.stringify({ foo: 'bar' }));
-``` 
+{% endhighlight %} 
 你也可以使用qs库。
 
 ##### 参考资料：
