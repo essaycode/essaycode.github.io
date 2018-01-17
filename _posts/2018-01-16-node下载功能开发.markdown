@@ -1,0 +1,105 @@
+---
+layout: post
+title:  "react组件刷新"
+date:   2018-01-09 20:44:19 +0800
+author: "杨磊"
+categories: yanglei
+---
+
+### 需求背景
+
+使用nodejs开发服务端时，可能会有下载功能需求，而且nodeJS也有丰富的组件，因项目中使用的是[Archiver](https://www.npmjs.com/package/archiver)插件，以下就简单的讲讲此插件的使用方式，此插件github上星不少，但是文档很粗糙。
+
+### 插件基本用法
+
+插件基本用法文档中已经有了如下：
+```
+var archiver = require('archiver');
+var fs = require('fs');
+//创建一个archiver对象
+var archive = archiver('zip', {
+  zlib: { level: 9 } // Sets the compression level.
+});
+//创建一个压缩包生成的输出路径,archiver会把数据流输入到此文件中
+var output = fs.createWriteStream(__dirname + '/example.zip');
+//添加要压缩的文件，使用append，第一个参数可以为文件的数据流，也可以是一段字符串，第二个参数有多个配置，以下只使用了name，name为压缩完成后的文件名，注意，此处可以输出路径如: dir/b.js
+archive.append('我是文件内容',{name: '1.txt'});
+//如果添加的是一个文件路径名，可使用如下方法
+archive.file('file1.txt', { name: 'file4.txt' });
+//需要压缩文件通过管道输出到output中，来生成压缩包。
+archive.pipe(output);
+//结束archive对象生命周期
+archive.finalize();
+```
+
+### 当配合Express使用
+很多情况下可能不只是服务端自己来操作，可能是页面层调用一个接口，然后接口会返回一个压缩包，这种情况要怎么操作呢？
+页面层的调用方式通常情况下如下（以下以jquery为例）：
+```
+$.ajax({
+    url:'我是万恶的URL',
+    type: 'get',
+    success: function(data) {
+        //TODO Success code
+    }
+})
+```
+对应Archiver内部需要配合express如下改造
+
+```
+var archiver = require('archiver');
+var fs = require('fs');
+var express = require('express');
+//首先搭建起来一个express服务器
+var app = express();
+var server = app.listen(80, () => {
+    console.log(`【${new Date()}】服务器启动!`);
+});
+app.use('/download', function(req, res, next) {
+    //需要给此请求添加类型，此处以zip为例
+    res.header('Content-Type', 'application/zip');
+    if (req.method == 'OPTIONS') {
+        res.send(200);
+    } else {
+        next();
+    }
+});
+app.get('/download', (req, res) => {
+    //创建一个支持GET的接口，
+    //压缩对应文件
+    var fs = require('fs');
+    var archive = archiver('zip', {
+    zlib: { level: 9 } // Sets the compression level.
+    });
+    archive.append('我是文件内容',{name: '1.txt'});
+    archive.file('file1.txt', { name: 'file4.txt' });
+    res.attachment('popui.zip');
+    archive.pipe(res);
+    archive.finalize();
+})
+```
+
+如果你按照此方写已经编写完成的话，恭喜你，已经完成了80%了，以为此种方式你会发现，压缩包会以数据流的方式在data中存在，你会疑问，此数据流要怎么来转化成zip呢？
+
+### 如何转化zip数据流
+
+其实此处我们只需要更改一下调用方式即可，此前使用的是ajax请求，返回值固然会进入data中，此处是无错的，但是想变成zip就只能望洋兴叹了。
+可以采用如下方式来操作：
+- 首先不能使用诸如AJAX的方式来请求。
+- 第二express不能使用post方式
+#### 改进方式如下
+- 采用GET方式
+- 采用href的方式来调用，代码参考下方
+```
+<a href="/download?id=1"></a>
+```
+
+切记只能使用此方式才能直接弹出zip文件的保存界面。
+
+至此你已经完成了下载功能的开发
+
+### 参考文献
+
+
+- [官方express例子](https://github.com/archiverjs/node-archiver/blob/master/examples/express.js)
+- [StackOverFlow经典答案](https://stackoverflow.com/questions/20107303/dynamically-create-and-stream-zip-to-client)
