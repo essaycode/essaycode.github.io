@@ -7,7 +7,7 @@ categories: liaoyanli
 ---
 ### 问题引入
 ##### 以下是官方文档介绍受控表单组件
-```
+{% highlight ruby %}
 export default class Form extends React.Component {
 	constructor(props) {
 	    super(props);
@@ -58,47 +58,46 @@ export default class Form extends React.Component {
             </div>
      	);
   	}
-
 }
-```
+{% endhighlight %}
 
 ##### 按照以上写法可以完成简单的表单输入，并提交数据，但是现在需要先给表单填上从父组件传过来的props的初始数据，马上想到defaultVaule对不对？思路是对的，但是当我修改成如下代码之后，视图并没有像我们意料中一样展示出来。
-```
+{% highlight ruby %}
 <input className="txt-input" type="text" defaultValue={self.props.editAddress.name} value={self.state.name} name="name" onChange={self.handleInputChange.bind(self)}/>
-```
+{% endhighlight %}
 ##### 编译后的html如下，value里依然是空的，这并不是我想要的
-```
+{% highlight ruby %}
 <input type="text" class="txt-input" value="" name="name">
-```
+{% endhighlight %}
 
 
 ### 解决方案
 ##### 实际上我被defaultValue带偏了，value里不是已经给了state吗？并且state就有默认值为空，所以在这里设置defaultValue并没有什么卵用。
 value默认值就是props，那直接给value赋值props不就好了。
-```
+{% highlight ruby %}
 <input className="txt-input" type="text" value={self.props.editAddress.name} name="name" onChange={self.handleInputChange.bind(self)}/>
-```
+{% endhighlight %}
 ##### 这样修改后，onChange事件就需要通过修改父组件的state值，来修改当前输入组件的value中props的值，如下更改：
 
 - 子组件
 
-```
+{% highlight ruby %}
 <input className="txt-input" type="text" value={self.props.editAddress.name} name="name" onChange={self.props.onUpdate.bind(self)}/>
-```
+{% endhighlight %}
 
 - 父组件
 
-```
+{% highlight ruby %}
 <Form onUpdate={self.updateAddress.bind(self)} pcat={self.state.pcat} onInputArea={self.openArea.bind(self)} editAddress={self.state.submitParams}/>
-```
+{% endhighlight %}
 
 ##### 如上修改完成后，功能实现没问题了，但是控制台此时给了你一个警告，告诉你：
-```
+{% highlight ruby %}
 Warning: A component is changing an uncontrolled input of type text to be controlled. Input elements should not switch from uncontrolled to controlled (or vice versa). Decide between using a controlled or uncontrolled input element for the lifetime of the component. More info: https://fb.me/react-controlled-components
-```
+{% endhighlight %}
 
 ##### 警告大致意思就是说你现在是受控组件，但是这个组件是不需要受控的。所以你需要改成非受控组件，那么去看看官方非受控组件是咋写的，然后回来改改。改完如下：
-```
-```
+{% highlight ruby %}
+{% endhighlight %}
 
 ### (未完待续)
