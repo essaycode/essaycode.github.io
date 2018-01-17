@@ -1,15 +1,18 @@
 ---
 layout: page
-title: About
+title: 关于我们
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+### 自我介绍
 
-You can find the source code for the Jekyll new theme at:
-{% include icon-github.html username="jglovier" %} /
-[jekyll-new](https://github.com/jglovier/jekyll-new)
+我们是一群年轻的攻城狮，喜欢研究各种新鲜领域的各种技术，崇拜的座右铭是：‘有困难，解决困难前进。没有困难制造困难，再解决困难前进’。本着没事找事的钻研态度下对待各种新技术，在坎坷的路途中会遇到各种或大或小的坑，当所有的坑都走过之后就是光明彼岸。
 
-You can find the source code for Jekyll at
-{% include icon-github.html username="jekyll" %} /
-[jekyll](https://github.com/jekyll/jekyll)
+---
+
+### 我们的目的
+
+此博客也是将我们的各种进坑过程都记录下来，希望能给其他遇到同样问题的人们带来光明。希望我们能像灯塔（Beacon）一样照亮你们的道路。
+
+
+#### 请记住我们的名字-Beacon团队
