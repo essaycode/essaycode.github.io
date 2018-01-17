@@ -11,20 +11,20 @@ categories: yanglei
 场景：需要禁用input的autocomplete属性。
 
 原始写法：
-```
+{% highlight ruby %}
 <input autocomplete="off"/>
-```
+{% endhighlight %}
 如果react中采用同样写法(会报错)
-```
+{% highlight ruby %}
 render() {
     return <input autocomplete="off"></input>
 }
-```
+{% endhighlight %}
 经过调研发现，react中原有属性，需要使用驼峰命名法，正确写法如下：
 
-```
+{% highlight ruby %}
 render() {
     return <input autoComplete="off"></input>
 }
-```
+{% endhighlight %}
 此种情况使用于很多场景，如input的max-length => maxLength。

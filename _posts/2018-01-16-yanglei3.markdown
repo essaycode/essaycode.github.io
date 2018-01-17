@@ -13,7 +13,7 @@ categories: yanglei
 ### 插件基本用法
 
 插件基本用法文档中已经有了如下：
-```
+{% highlight ruby %}
 var archiver = require('archiver');
 var fs = require('fs');
 //创建一个archiver对象
@@ -30,12 +30,12 @@ archive.file('file1.txt', { name: 'file4.txt' });
 archive.pipe(output);
 //结束archive对象生命周期
 archive.finalize();
-```
+{% endhighlight %}
 
 ### 当配合Express使用
 很多情况下可能不只是服务端自己来操作，可能是页面层调用一个接口，然后接口会返回一个压缩包，这种情况要怎么操作呢？
 页面层的调用方式通常情况下如下（以下以jquery为例）：
-```
+{% highlight ruby %}
 $.ajax({
     url:'我是万恶的URL',
     type: 'get',
@@ -43,10 +43,10 @@ $.ajax({
         //TODO Success code
     }
 })
-```
+{% endhighlight %}
 对应Archiver内部需要配合express如下改造
 
-```
+{% highlight ruby %}
 var archiver = require('archiver');
 var fs = require('fs');
 var express = require('express');
@@ -77,7 +77,7 @@ app.get('/download', (req, res) => {
     archive.pipe(res);
     archive.finalize();
 })
-```
+{% endhighlight %}
 
 如果你按照此方写已经编写完成的话，恭喜你，已经完成了80%了，以为此种方式你会发现，压缩包会以数据流的方式在data中存在，你会疑问，此数据流要怎么来转化成zip呢？
 
@@ -90,9 +90,9 @@ app.get('/download', (req, res) => {
 #### 改进方式如下
 - 采用GET方式
 - 采用href的方式来调用，代码参考下方
-```
+{% highlight ruby %}
 <a href="/download?id=1"></a>
-```
+{% endhighlight %}
 
 切记只能使用此方式才能直接弹出zip文件的保存界面。
 

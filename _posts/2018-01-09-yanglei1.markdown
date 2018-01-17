@@ -11,7 +11,7 @@ categories: yanglei
 当数据卸载react的state中时，直接调用this.state.XX来触发自动渲染。
 
 #### 此操作方式无法触发div内部数据变化
-```
+{% highlight ruby %}
 class Index extends React.Component {
     constructor(props) {
         super(props);
@@ -26,12 +26,11 @@ class Index extends React.Component {
         return <div>{this.state.code}</div>
     }
 }
-```
+{% endhighlight %}
 解决以上绑定问题有一下2中解决方案：
 
 - 数据不存在state中，因为state是react中一个默认携带的数据，代码修改如下：
-
-```
+{% highlight ruby %}
 class Index extends React.Component {
     constructor(props) {
         super(props);
@@ -44,9 +43,9 @@ class Index extends React.Component {
         return <div>{this.code}</div>
     }
 }
-```
+{% endhighlight %}
 - 另外一种方法是使用setState来改变state的值，才可以重新渲染，代码改动如下：
-```
+{% highlight ruby %}
 class Index extends React.Component {
     constructor(props) {
         super(props);
@@ -63,6 +62,6 @@ class Index extends React.Component {
         return <div>{this.state.code}</div>
     }
 }
-```
+{% endhighlight %}
 
 以上2种方法就可以动态更新data数据了。
