@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html>
 
-  {% include head.html %}
+{% include head.html %}
 
-  <body>
+<body>
 
     {% include header.html %}
 
     <div class="page-content">
-      <div class="wrapper">
-        {{ content }}
-      </div>
+        <div class="wrapper">
+            {{ content }}
+            <div style="border-top: 2px solid #ccc">
+                <p style="margin-top: 15px; line-height:40px;">如果您的求知欲还没有满足，可以关注我们的公众号哦！</p>
+                <img style="width:50%" src="/assets/img/gzh.png">
+            </div>
+        </div>
     </div>
 
     {% include footer.html %}
 
-  </body>
+</body>
 
 </html>
