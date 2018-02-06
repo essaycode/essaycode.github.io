@@ -97,7 +97,9 @@ Warning: A component is changing an uncontrolled input of type text to be contro
 {% endhighlight %}
 
 ##### 警告大致意思就是说你现在是受控组件，但是这个组件是不需要受控的。所以你需要改成非受控组件，那么去看看官方非受控组件是咋写的，然后回来改改。改完如下：
-{% highlight ruby %}
-{% endhighlight %}
 
-### (未完待续)
+- 子组件
+
+{% highlight ruby %}
+<input className="txt-input" type="text" value={self.props.editAddress.name||''} name="name" onChange={self.props.onUpdate.bind(self)}/>
+{% endhighlight %}
