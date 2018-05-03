@@ -1,0 +1,60 @@
+---
+layout: post
+title:  "webpack 代码优化压缩方法"
+date:   2018-04-25 19:56:19 +0800
+author: "孙印凤"
+categories: sunyinfeng
+---
+
+在配置基于webpack的react单页面脚手架时，公共依赖库代码打包至vender.js中，页面逻辑代码打包至app.js中，使用webpack-bundle-analyzer分析发现，两个js中包含重复代码。优化方法如下：
+
+### webpack.config.js 修改
+
+（1）修改入口文件的顺序
+{% highlight ruby %}
+    webpackConfig.entry = {
+        vender: [
+            'babel-polyfill',
+            'classnames',
+            'react',
+            'react-dom',
+            'axios',
+            'react-router',
+            'react-router-dom'
+        ],
+        app: './src/app.jsx'
+    }
+{% endhighlight %}
+
+（2）uglifyjs-webpack-plugin、CommonsChunkPlugin
+{% highlight ruby %}
+    webpackConfig.plugins = (webpackConfig.plugins || []).concat([
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('production')
+            }
+        }),
+        new webpack.LoaderOptionsPlugin({
+            minimize: true
+        }),
+        //去除打包后代码中的注释等信息
+        new UglifyJsPlugin({
+            uglifyOptions: {
+              output: {
+                comments: false
+              },
+              compress: true
+            }
+        }),
+        //添加打包文件时的时间戳
+        new webpack.BannerPlugin(bannerTxt),
+        //公共代码抽取
+        new webpack.optimize.CommonsChunkPlugin({
+            name: "vender",
+            minChunks: Infinity
+        })
+    ]);
+{% endhighlight %}
+
+##### 参考资料：
+1. [webpack-bundle-analyzer 配置方法](https://segmentfault.com/a/1190000012220132)
