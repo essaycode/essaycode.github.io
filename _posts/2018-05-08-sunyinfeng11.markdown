@@ -1,0 +1,34 @@
+---
+layout: post
+title:  "webpack中build后css属性前缀缺失问题"
+date:   2018-05-08 16:18:08 +0800
+author: "孙印凤"
+categories: sunyinfeng
+---
+
+使用webpack构建工具进行项目开发时使用autoprefixer自动补全css前缀，可是发现开发环境下前缀已自动补全，在生产环境存在某些css前缀缺失的问题。
+
+### 问题定位
+对比了开发环境和生产环境, 不同的地方就是开发环境用了extract-text-webpack-plugin做css合并, 初步怀疑就是这个造成的。于是在extract-text-webpack-plugin, postcss-loader, css-loader的 ISSUES 找原因, 最终在css-loader文档中找到:
+
+“By default the css-loader minimizes the css if specified by the module system.
+In some cases the minification is destructive to the css, so you can provide some options to it. cssnano is used for minification and you find a list of options here. Just provide them as query parameter: i. e. require("css-loader?-autoprefixer") to disable removing of deprecated vendor prefixes.”
+
+意思是：css-loader默认使用 cssnano 压缩css，会将一些前缀删除。可以使用"css-loader?-autoprefixer"补全已删除的前缀。
+
+### 解决方法
+{% highlight ruby %}
+   use: ExtractTextPlugin.extract({
+            fallback: "style-loader",
+            use: ['css-loader?-autoprefixer', {
+                loader: 'postcss-loader',
+                options: {
+                    config: {
+                        path: path.resolve(__dirname, 'postcss.config.js')
+                    }
+                }
+            }]
+        })
+{% endhighlight %}
+
+

@@ -1,0 +1,24 @@
+---
+layout: post
+title:  "IE9下e.target.value获取值失败解决方法"
+date:   2018-05-08 16:05:08 +0800
+author: "孙印凤"
+categories: sunyinfeng
+---
+
+在react项目开发中，input标签使用onChange方法获取输入值改变state：
+{% highlight ruby %}
+   <input type="text" id="redeemNum" value={state.num} onChange={(e) => this.inputChange(e.target.value)}/>个数</p>
+{% endhighlight %}
+
+在IE9下发现 e.target.value 取值一直为undefined。在IE中，e.target 指的是window，所以取值失败。查阅React文档可以发现 --
+{% highlight ruby %}
+    对于 <input>和<textarea>，onChange通常应该用代替DOM的内置onInput事件进行处理函数。
+{% endhighlight %}
+
+### 解决方法
+
+{% highlight ruby %}
+   <input type="text" id="redeemNum" value={state.num} onInput={(e) => this.inputChange(e.target.value)}/>个数</p>
+{% endhighlight %}
+
